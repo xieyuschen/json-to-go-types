@@ -1,12 +1,12 @@
 {
     "Config1": {
-        "c1.1": 123,
-        "c1.2": "from config 1.2"
+        "c11": 123,
+        "c12": "from config 1.2"
     },
     "Config2": "from config 2.1",
     "Config3": {
-        "c3.1": {
-            "c3.1.1": "from config 3.1.1"
+        "c31": {
+            "c311": "from config 3.1.1"
         }
     }
 }

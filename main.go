@@ -24,19 +24,27 @@ func main()  {
 		log.Panic(err)
 	}
 
+	f,err:=os.Create("Config_gen.go")
+	if err!=nil{
+		log.Panic(err.Error())
+	}
 	m:=config.(map[string]interface{})
 	//panic: interface conversion: interface {} is map[string]interface {}, not main.Hello
 	//Cannot use assets to convert an interface to a struct
-	ShowToYou(m)
+	f.WriteString("package main\ntype Config struct{")
+	f.Write([]byte("\n"))
+	ShowToYou(m,f)
+	f.WriteString("}")
 
 }
-func ShowToYou(m map[string]interface{}){
-	for _,value:=range m{
+func ShowToYou(m map[string]interface{},file *os.File){
+	for index,value:=range m{
 		t:=GetType(value)
 		if t=="interface"{
-			ShowToYou(value.(map[string]interface{}))
+			ShowToYou(value.(map[string]interface{}),file)
 		}else {
-			fmt.Println(value," type is:",t)
+			file.WriteString("\t"+index+" "+t)
+			file.Write([]byte("\n"))
 		}
 	}
 }
