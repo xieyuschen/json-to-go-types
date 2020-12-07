@@ -1,7 +1,12 @@
 {
-    "Hello": {
-        "world": 123,
-        "hh": "blabla"
+    "Config1": {
+        "c1.1": 123,
+        "c1.2": "from config 1.2"
     },
-    "AString": "blabla"
+    "Config2": "from config 2.1",
+    "Config3": {
+        "c3.1": {
+            "c3.1.1": "from config 3.1.1"
+        }
+    }
 }
