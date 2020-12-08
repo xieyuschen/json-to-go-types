@@ -1,29 +1,58 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
+	flags "github.com/jessevdk/go-flags"
 	"go/generator"
-	"go/models"
-	"io/ioutil"
-	"log"
 	"os"
 )
-func ReadSettingsFromFile(settingFilePath string)(config models.Config){
-	jsonFile, err := os.Open(settingFilePath)
-	if err != nil {
-		fmt.Println(err)
-	}
-	defer jsonFile.Close()
-	byteValue, _ := ioutil.ReadAll(jsonFile)
-	err = json.Unmarshal(byteValue, &config)
-	if err != nil {
-		log.Panic(err)
-	}
-	return config
+//func ReadSettingsFromFile(settingFilePath string)(config models.Config){
+//	jsonFile, err := os.Open(settingFilePath)
+//	if err != nil {
+//		fmt.Println(err)
+//	}
+//	defer jsonFile.Close()
+//	byteValue, _ := ioutil.ReadAll(jsonFile)
+//	err = json.Unmarshal(byteValue, &config)
+//	if err != nil {
+//		log.Panic(err)
+//	}
+//	return config
+//}
+var opts struct {
+
+	Generator	 bool `short:"g"`
+	Version bool `short:"v" long:"version"`
+	ConfigPath string `short:"p" long:"path" description:"Store config path"`
+	StoragePath string `short:"s" long:"storage"`
 }
 func main(){
-	generator.GenerateModels("config.json")
-	config:=ReadSettingsFromFile("config.json")
-	fmt.Println(config.Config1.C12)
+	//generator.GenerateModels("config.json")
+	//config:=ReadSettingsFromFile("config.json")
+	//fmt.Println(config.Config1.C12)
+
+	_, err := flags.ParseArgs(&opts, os.Args)
+
+	if err != nil {
+		panic(err)
+	}
+	if opts.Version{
+		fmt.Println("v0.1")
+	}else if opts.Generator{
+		fmt.Println(opts.ConfigPath)
+		var jsonPath string
+		var storage string
+		if opts.ConfigPath!=""{
+			jsonPath=opts.ConfigPath
+		}else {
+			jsonPath="config.json"
+		}
+		if opts.StoragePath!=""{
+			storage=opts.StoragePath
+		}else {
+			storage="./models/Config_gen.go"
+		}
+		fmt.Println(jsonPath,storage)
+		generator.GenerateModels(jsonPath,storage)
+	}
 }

@@ -12,7 +12,7 @@ import (
 var que *queue.Queue
 var configQue *queue.Queue
 var singleQue *queue.Queue
-func GenerateModels(ConfigFilePath string)  {
+func GenerateModels(ConfigFilePath string,GenerateModelPath string)  {
 	que =queue.New()
 	configQue =queue.New()
 	singleQue =queue.New()
@@ -27,8 +27,8 @@ func GenerateModels(ConfigFilePath string)  {
 	if err != nil {
 		log.Panic(err)
 	}
-
-	f,err:=os.Create("./models/Config_gen.go")
+	fmt.Println(GenerateModelPath)
+	f,err:=os.Create(GenerateModelPath)
 	if err!=nil{
 		log.Panic(err.Error())
 	}
