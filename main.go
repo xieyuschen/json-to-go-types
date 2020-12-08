@@ -3,102 +3,27 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/golang-collections/collections/queue"
+	"go/generator"
+	"go/models"
 	"io/ioutil"
 	"log"
 	"os"
-	"strings"
 )
-var que *queue.Queue
-var ConfigQue *queue.Queue
-var singleQue *queue.Queue
-func main()  {
-	que=queue.New()
-	ConfigQue=queue.New()
-	singleQue=queue.New()
-	jsonFile, err := os.Open("config.json")
+func ReadSettingsFromFile(settingFilePath string)(config models.Config){
+	jsonFile, err := os.Open(settingFilePath)
 	if err != nil {
 		fmt.Println(err)
 	}
 	defer jsonFile.Close()
 	byteValue, _ := ioutil.ReadAll(jsonFile)
-	var config interface{}
 	err = json.Unmarshal(byteValue, &config)
 	if err != nil {
 		log.Panic(err)
 	}
-
-	f,err:=os.Create("Config_gen.go")
-	if err!=nil{
-		log.Panic(err.Error())
-	}
-	m:=config.(map[string]interface{})
-	//panic: interface conversion: interface {} is map[string]interface {}, not main.Hello
-	//Cannot use assets to convert an interface to a struct
-	f.WriteString("package main\n")
-	ConfigTypeGenerator(m,f)
-
-	for que.Len()!=0{
-		name:=que.Dequeue().(string)
-		name=strings.Title(strings.ToLower(name))
-		f.Write([]byte("\n"))
-		ConfigQue.Enqueue(name)
-		f.WriteString("type "+name+" struct{")
-		f.Write([]byte("\n"))
-		ModelGenerator(que.Dequeue().(map[string]interface{}),f)
-		f.WriteString("}")
-	}
-	f.Write([]byte("\n"))
-	f.WriteString("type Config struct{")
-	for singleQue.Len()!=0{
-		f.Write([]byte("\n"))
-		_name:=singleQue.Dequeue().(string)
-		_type:=singleQue.Dequeue().(string)
-		f.WriteString("\t"+_name+" "+_type)
-	}
-	for ConfigQue.Len()!=0{
-		f.Write([]byte("\n"))
-		n:=ConfigQue.Dequeue().(string)
-		f.WriteString("\t"+n+" "+n)
-	}
-	f.WriteString("}")
-
-	fmt.Println("Generate configuration models by config.json file successfully,,models are stored in Config_gen.go")
+	return config
 }
-func ConfigTypeGenerator(m map[string]interface{},file *os.File){
-	for index,value:=range m{
-		t:=GetType(value)
-		if t=="interface"{
-			que.Enqueue(index)
-			que.Enqueue(value)
-		}else {
-			singleQue.Enqueue(index)
-			singleQue.Enqueue(t)
-		}
-	}
-}
-func ModelGenerator(m map[string]interface{},file *os.File){
-	for index,value:=range m{
-		t:=GetType(value)
-		if t=="interface"{
-			que.Enqueue(index)
-			que.Enqueue(value)
-		}else {
-			file.WriteString("\t" + strings.Title(strings.ToLower(index))+" "+t)
-			file.Write([]byte("\n"))
-		}
-	}
-}
-func GetType(val interface{}) string{
-	if _,ok:=val.(int);ok{
-		return "int"
-	}else if _,ok:=val.(float64);ok{
-		return "float64"
-	}else if _,ok:=val.(string);ok{
-		return "string"
-	}else if _,ok:=val.(interface{});ok{
-		return "interface"
-	}else {
-		return "halt"
-	}
+func main(){
+	generator.GenerateModels("config.json")
+	config:=ReadSettingsFromFile("config.json")
+	fmt.Println(config.Config1.C12)
 }
