@@ -3,15 +3,15 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/golang-collections/collections/queue"
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 )
-type Hello struct{
-	hh string
-	world int
-}
+var que *queue.Queue
 func main()  {
+	que=queue.New()
 	jsonFile, err := os.Open("config.json")
 	if err != nil {
 		fmt.Println(err)
@@ -33,17 +33,29 @@ func main()  {
 	//Cannot use assets to convert an interface to a struct
 	f.WriteString("package main\ntype Config struct{")
 	f.Write([]byte("\n"))
-	ShowToYou(m,f)
+	ModelGenerator(m,f)
 	f.WriteString("}")
 
+	for que.Len()!=0{
+		name:=que.Dequeue().(string)
+		name=strings.Title(strings.ToLower(name))
+		f.Write([]byte("\n"))
+		f.WriteString("type "+name+" struct{")
+		f.Write([]byte("\n"))
+		ModelGenerator(que.Dequeue().(map[string]interface{}),f)
+		f.WriteString("}")
+	}
+
+	fmt.Println("Generate configuration models by config.json file successfully,,models are stored in Config_gen.go")
 }
-func ShowToYou(m map[string]interface{},file *os.File){
+func ModelGenerator(m map[string]interface{},file *os.File){
 	for index,value:=range m{
 		t:=GetType(value)
 		if t=="interface"{
-			ShowToYou(value.(map[string]interface{}),file)
+			que.Enqueue(index)
+			que.Enqueue(value)
 		}else {
-			file.WriteString("\t"+index+" "+t)
+			file.WriteString("\t" + strings.Title(strings.ToLower(index))+" "+t)
 			file.Write([]byte("\n"))
 		}
 	}

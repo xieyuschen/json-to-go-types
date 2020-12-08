@@ -5,8 +5,6 @@
     },
     "Config2": "from config 2.1",
     "Config3": {
-        "c31": {
-            "c311": "from config 3.1.1"
-        }
+        "c31": "from config 3.1"
     }
 }
