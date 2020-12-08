@@ -1,4 +1,4 @@
-module go
+module github.com/Pivot-Studio/GoReadingJsonConfiguration
 
 go 1.15
 
