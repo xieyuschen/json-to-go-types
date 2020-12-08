@@ -10,8 +10,12 @@ import (
 	"strings"
 )
 var que *queue.Queue
+var ConfigQue *queue.Queue
+var singleQue *queue.Queue
 func main()  {
 	que=queue.New()
+	ConfigQue=queue.New()
+	singleQue=queue.New()
 	jsonFile, err := os.Open("config.json")
 	if err != nil {
 		fmt.Println(err)
@@ -31,22 +35,47 @@ func main()  {
 	m:=config.(map[string]interface{})
 	//panic: interface conversion: interface {} is map[string]interface {}, not main.Hello
 	//Cannot use assets to convert an interface to a struct
-	f.WriteString("package main\ntype Config struct{")
-	f.Write([]byte("\n"))
-	ModelGenerator(m,f)
-	f.WriteString("}")
+	f.WriteString("package main\n")
+	ConfigTypeGenerator(m,f)
 
 	for que.Len()!=0{
 		name:=que.Dequeue().(string)
 		name=strings.Title(strings.ToLower(name))
 		f.Write([]byte("\n"))
+		ConfigQue.Enqueue(name)
 		f.WriteString("type "+name+" struct{")
 		f.Write([]byte("\n"))
 		ModelGenerator(que.Dequeue().(map[string]interface{}),f)
 		f.WriteString("}")
 	}
+	f.Write([]byte("\n"))
+	f.WriteString("type Config struct{")
+	for singleQue.Len()!=0{
+		f.Write([]byte("\n"))
+		_name:=singleQue.Dequeue().(string)
+		_type:=singleQue.Dequeue().(string)
+		f.WriteString("\t"+_name+" "+_type)
+	}
+	for ConfigQue.Len()!=0{
+		f.Write([]byte("\n"))
+		n:=ConfigQue.Dequeue().(string)
+		f.WriteString("\t"+n+" "+n)
+	}
+	f.WriteString("}")
 
 	fmt.Println("Generate configuration models by config.json file successfully,,models are stored in Config_gen.go")
+}
+func ConfigTypeGenerator(m map[string]interface{},file *os.File){
+	for index,value:=range m{
+		t:=GetType(value)
+		if t=="interface"{
+			que.Enqueue(index)
+			que.Enqueue(value)
+		}else {
+			singleQue.Enqueue(index)
+			singleQue.Enqueue(t)
+		}
+	}
 }
 func ModelGenerator(m map[string]interface{},file *os.File){
 	for index,value:=range m{
