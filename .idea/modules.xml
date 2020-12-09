@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/GoReadingJsonConfiguration.iml" filepath="$PROJECT_DIR$/.idea/GoReadingJsonConfiguration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/gojsonconfig.iml" filepath="$PROJECT_DIR$/.idea/gojsonconfig.iml" />
     </modules>
   </component>
 </project>

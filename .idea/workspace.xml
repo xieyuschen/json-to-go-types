@@ -20,9 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b358f07-ceb9-4db8-b93a-e9b8fa7ad8b6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/GoReadingJsonConfiguration.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gojsonconfig.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_generator.go" beforeDir="false" afterPath="$PROJECT_DIR$/generator/model_generator.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/Config_gen.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +61,7 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BackendManager" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -77,7 +80,7 @@
   </component>
   <component name="RunManager">
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="GoReadingJsonConfiguration" />
+      <module name="gojsonconfig" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="FILE" />
       <filePath value="$PROJECT_DIR$/main.go" />
@@ -133,25 +136,25 @@
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1607519584779" />
     <state x="622" y="190" key="FileChooserDialogImpl/0.0.1739.939@0.0.1739.939" timestamp="1607410761916" />
-    <state width="1696" height="249" key="GridCell.Tab.0.bottom" timestamp="1607410088571">
-      <screen x="0" y="0" width="1739" height="939" />
+    <state width="1493" height="183" key="GridCell.Tab.0.bottom" timestamp="1607526350270">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="180" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607399128420" />
+    <state width="1493" height="183" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607526350270" />
     <state width="1696" height="249" key="GridCell.Tab.0.bottom/0.0.1739.939@0.0.1739.939" timestamp="1607410088571" />
-    <state width="1696" height="249" key="GridCell.Tab.0.center" timestamp="1607410088571">
-      <screen x="0" y="0" width="1739" height="939" />
+    <state width="1493" height="183" key="GridCell.Tab.0.center" timestamp="1607526350270">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="180" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607399128420" />
+    <state width="1493" height="183" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607526350270" />
     <state width="1696" height="249" key="GridCell.Tab.0.center/0.0.1739.939@0.0.1739.939" timestamp="1607410088571" />
-    <state width="1696" height="249" key="GridCell.Tab.0.left" timestamp="1607410088571">
-      <screen x="0" y="0" width="1739" height="939" />
+    <state width="1493" height="183" key="GridCell.Tab.0.left" timestamp="1607526350270">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="180" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607399128419" />
+    <state width="1493" height="183" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607526350270" />
     <state width="1696" height="249" key="GridCell.Tab.0.left/0.0.1739.939@0.0.1739.939" timestamp="1607410088571" />
-    <state width="1696" height="249" key="GridCell.Tab.0.right" timestamp="1607410088571">
-      <screen x="0" y="0" width="1739" height="939" />
+    <state width="1493" height="183" key="GridCell.Tab.0.right" timestamp="1607526350270">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="180" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607399128420" />
+    <state width="1493" height="183" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607526350270" />
     <state width="1696" height="249" key="GridCell.Tab.0.right/0.0.1739.939@0.0.1739.939" timestamp="1607410088571" />
     <state width="1493" height="180" key="GridCell.Tab.1.bottom" timestamp="1607399128420">
       <screen x="0" y="0" width="1536" height="824" />

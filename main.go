@@ -1,9 +1,12 @@
 package main
 
 import (
+
 	"fmt"
-	"github.com/Pivot-Studio/GoReadingJsonConfiguration/generator"
+	"github.com/Pivot-Studio/gojsonconfig/generator"
+
 	flags "github.com/jessevdk/go-flags"
+
 	"os"
 )
 //func ReadSettingsFromFile(settingFilePath string)(config models.Config){
@@ -35,20 +38,6 @@ func main(){
 	if opts.Version{
 		fmt.Println("v0.1")
 	}else if opts.Generator{
-		fmt.Println(opts.ConfigPath)
-		var jsonPath string
-		var storage string
-		if opts.ConfigPath!=""{
-			jsonPath=opts.ConfigPath
-		}else {
-			jsonPath="config.json"
-		}
-		if opts.StoragePath!=""{
-			storage=opts.StoragePath
-		}else {
-			storage="./models/Config_gen.go"
-		}
-		fmt.Println(jsonPath,storage)
-		generator.GenerateModels(jsonPath,storage)
+		generator.GenerateModels("config.json","./models/Config_gen.go")
 	}
 }
