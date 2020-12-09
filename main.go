@@ -3,7 +3,7 @@ package main
 import (
 
 	"fmt"
-	"github.com/Pivot-Studio/gojsonconfig/generator"
+	"gojsonconfig/generator"
 
 	flags "github.com/jessevdk/go-flags"
 
