@@ -1,4 +1,4 @@
-module github.com/Pivot-Studio/gojsonconfig
+module gojsonconfig
 
 go 1.15
 
