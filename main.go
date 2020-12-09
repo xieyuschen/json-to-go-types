@@ -1,7 +1,8 @@
-package generator
+package main
 
 import (
 	"fmt"
+	"github.com/Pivot-Studio/GoReadingJsonConfiguration/generator"
 	flags "github.com/jessevdk/go-flags"
 	"os"
 )
@@ -26,10 +27,6 @@ var opts struct {
 	StoragePath string `short:"s" long:"storage"`
 }
 func main(){
-	//generator.GenerateModels("config.json")
-	//config:=ReadSettingsFromFile("config.json")
-	//fmt.Println(config.Config1.C12)
-
 	_, err := flags.ParseArgs(&opts, os.Args)
 
 	if err != nil {
@@ -52,6 +49,6 @@ func main(){
 			storage="./models/Config_gen.go"
 		}
 		fmt.Println(jsonPath,storage)
-		GenerateModels(jsonPath,storage)
+		generator.GenerateModels(jsonPath,storage)
 	}
 }
