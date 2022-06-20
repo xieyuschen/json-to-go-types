@@ -1,11 +1,11 @@
 # 如何使用该库
 - 安装package
 ```
-go mod -u "https://github.com/Pivot-Studio/gojsonconfig"
+go mod -u "https://github.com/xieyuschen/json-to-go-types"
 ```
-- 你可以使用gojsonconfig -v来检查是否成功安装，如果成功安装，则会显示如下内容：
+- 你可以使用`json-to-go-types -v`来检查是否成功安装，如果成功安装，则会显示如下内容：
 ```sh
-$ gojsonconfig -v
+$ json-to-go-types -v
 v0.1
 ```
 - 为我们的Json文件生成结构体
@@ -19,7 +19,7 @@ $-->cmd中你现在的位置
 ```
 在此完成之后，在当前目录中运行命令：
 ```
-gojsonconfig -g
+json-to-go-types -g
 ```
 好了，在该步完成之后，你就可以在`models`文件夹中看到一个`Config_gen.go`文件，这个文件中存储着根据`config.json`文件结构生产的结构体。
 

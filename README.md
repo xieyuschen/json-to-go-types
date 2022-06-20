@@ -7,12 +7,12 @@ is weak,so we want to give you a stronger and more robust way to get json value.
 
 - Use command below to install package `gojsonconfig`
 ```
-go mod -u "https://github.com/Pivot-Studio/gojsonconfig"
+go mod -u "https://github.com/xieyuschen/json-to-go-types"
 ```
 - You can use command `gojsonconfig -v` to check whether you install this package successfully or not. If you are successful,
 you will see output as this at terminal.
 ```sh
-$ gojsonconfig -v
+$ json-to-go-types -v
 v0.1
 ```
 - Generate a struct based on json file for further reading
@@ -27,7 +27,7 @@ $-->your current postion
 ```
 Do command below after all of thing before done.
  ```
-gojsonconfig -g
+json-to-go-types -g
 ```
 After this you can find a `Config_gen.go` file in `models` dictionary which is a struct based on the `config.json`.
 - You can read json to the model generated before like this:
